@@ -46,3 +46,10 @@
       ```
   * tag:用于消息过滤，消息分组
   * key:
+  
+## 事务消息
+  * 开启事务，producer 发送 half msg
+  * broker 写入 half 队列，返回给producer
+  * 执行本地事务，producer 发送rollback或者commit消息
+  * 如果broker超时未收到确认，定时任务轮询half队列，回查producer状态
+  * 如果确认commit，consumer就可以消费到
