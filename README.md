@@ -20,13 +20,11 @@
     * 启动:nohup java -jar rocketmq-console-ng-1.0.1.jar &
 
   * 问题记录
-    * client无法send(msg)，但是console后台可以，由于为配置：`/root/home/rocketmq-4.8/distribution/target/rocketmq-4.8.0/rocketmq-4.8.0/conf`
+    * client无法send(msg)，但是console后台可以，由于缺少配置：`/root/home/rocketmq-4.8/distribution/target/rocketmq-4.8.0/rocketmq-4.8.0/conf/broker.conf`
     * 默认添加两个地址，用于注册到name service
-
         > brokerIP1=192.168.56.100
-        > 
         > brokerIP2=192.168.56.100
-
+    * producer发送消息，不是直接找broker，而是找name server，找到对应的broker，最后再找到topic
 ## 组件介绍
 
   * name server:服务注册中心，无状态，信息存储在内存里，并不会协同数据
