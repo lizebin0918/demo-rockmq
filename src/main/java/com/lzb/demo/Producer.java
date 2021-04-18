@@ -2,8 +2,7 @@ package com.lzb.demo;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.client.producer.*;
 import org.apache.rocketmq.common.message.Message;
 
 import java.util.List;
@@ -33,12 +32,32 @@ public class Producer {
     public static void main(String[] args) throws Exception {
         String topic = "MyTopic";
         SendResult sendResult = sendSingle(topic, ("hello world-" + RandomStringUtils.randomAlphabetic(5)));
-        PRODUCER.shutdown();
+
         System.out.println(JSON.toJSONString(sendResult));
+
+        //异步消息，不阻塞，采用事件监听接受broker回调
+        PRODUCER.send(new Message("MyTopic", "asyn message".getBytes()), new SendCallback() {
+
+            @Override
+            public void onSuccess(SendResult sendResult) {
+                System.out.println("发送成功");
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+                System.out.println("发送失败");
+            }
+        });
+
+        //（单向消息）直接发出去，不关注结果
+        PRODUCER.sendOneway(new Message("MyTopic", "one way message".getBytes()));
+        PRODUCER.sendOneway(new Message("MyTopic", "tag", "key", "one way message".getBytes()));
+
+        //PRODUCER.shutdown();
     }
 
     /**
-     * 发送单个消息
+     * 发送单个消息(同步)
      * @param topic
      * @param body
      * @return
@@ -53,7 +72,7 @@ public class Producer {
     }
 
     /**
-     * 发送多条消息
+     * 发送多条消息(异步)
      * @param topic
      * @param bodys
      * @return
@@ -65,4 +84,5 @@ public class Producer {
             throw new RuntimeException("error");
         }
     }
+
 }

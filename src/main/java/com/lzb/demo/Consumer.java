@@ -21,7 +21,7 @@ public class Consumer {
         consumer.setNamesrvAddr("192.168.56.100:9876");
 
         //一个consumer只能subscribe一个topic，第二个参数表示过滤器
-        consumer.subscribe("MyTopic", "*");
+        consumer.subscribe("myTopic", "*");
 
         //默认情况下，只能被一个消费者消费消息，P2P模式
         consumer.registerMessageListener(new MessageListenerOrderly() {
