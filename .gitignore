@@ -33,7 +33,6 @@ fabric.properties
 
 /target/
 /upload/
-target/*
 
 node_modules/
 /.idea
