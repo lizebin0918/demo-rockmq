@@ -30,7 +30,7 @@ public class Producer {
     }
 
     public static void main(String[] args) throws Exception {
-        String topic = "MyTopic";
+        String topic = "MyTopic-1";
         SendResult sendResult = sendSingle(topic, ("hello world-" + RandomStringUtils.randomAlphabetic(5)));
 
         System.out.println(JSON.toJSONString(sendResult));

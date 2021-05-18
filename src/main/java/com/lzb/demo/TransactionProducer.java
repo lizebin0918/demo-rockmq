@@ -1,4 +1,4 @@
-package com.lzb.demo1;
+package com.lzb.demo;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.rocketmq.client.exception.MQBrokerException;
