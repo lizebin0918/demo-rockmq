@@ -26,7 +26,6 @@ public class Consumer {
         //默认情况下，只能被一个消费者消费消息，P2P模式
         consumer.registerMessageListener(new MessageListenerOrderly() {
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
-                System.out.println(" get message ");
                 for (MessageExt message : list) {
                     System.out.println("message : " + JSON.toJSONString(new String(message.getBody())));
                 }

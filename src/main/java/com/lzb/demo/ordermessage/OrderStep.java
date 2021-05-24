@@ -26,39 +26,39 @@ public class OrderStep {
         OrderStep order2 = new OrderStep();
         OrderStep order3 = new OrderStep();
 
-        order1.setDesc("下单");
+        order1.setDesc("下单-1");
         order1.setGroupId(1);
         order1.setOrderId(1);
         list.add(order1);
 
         order1 = new OrderStep();
-        order1.setDesc("推送");
+        order1.setDesc("推送-1");
         order1.setGroupId(1);
         order1.setOrderId(2);
         list.add(order1);
 
-        order2.setDesc("下单");
+        order2.setDesc("下单-2");
         order2.setGroupId(2);
         order2.setOrderId(1);
         list.add(order2);
 
         order1 = new OrderStep();
-        order1.setDesc("完成");
+        order1.setDesc("完成-1");
         order1.setGroupId(1);
         order1.setOrderId(3);
         list.add(order1);
 
-        order3.setDesc("下单");
+        order3.setDesc("下单-3");
         order3.setGroupId(3);
         order3.setOrderId(1);
         list.add(order3);
 
-        order1.setDesc("推送");
+        order1.setDesc("推送-2");
         order1.setGroupId(2);
         order1.setOrderId(2);
         list.add(order2);
 
-        order3.setDesc("推送");
+        order3.setDesc("推送-3");
         order3.setGroupId(3);
         order3.setOrderId(2);
         list.add(order3);

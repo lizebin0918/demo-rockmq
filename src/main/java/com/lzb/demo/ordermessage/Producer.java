@@ -41,7 +41,7 @@ public class Producer {
                                           Objects.toString(orderStep.getGroupId()) + Objects.toString(orderStep.getOrderId()),
                                           JSON.toJSONString(orderStep).getBytes());
             /**
-             * msg:消息对象
+             * msg:消息对象:通过对消息的key，进行hash，相同hash的消息会被分配到同一个分区里面
              * 参数二：消息队列选择器
              * 参数三：选择业务标识
              */
@@ -49,9 +49,9 @@ public class Producer {
                 @Override
                 public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {
                     long groupId = (long)arg;
-                    //根据id取模，找到对应的队列索引（均分）
-                    long index = groupId % mqs.size();
-                    return mqs.get((int)index);
+                    System.out.println(JSON.toJSONString(mqs));
+                    //表示同一个groupId放到同一个队列
+                    return mqs.get((int)groupId % mqs.size());
                 }
             }, orderStep.getGroupId());
 
