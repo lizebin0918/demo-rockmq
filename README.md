@@ -48,9 +48,10 @@
       * 过滤消息 -> 
       * 事务消息
   * consumer:消费者（顺序消费，并行消费）
-    * 主动去Broker上拉取消息的拉模式
-    * Broker把消息推送过来的推模式
+    * 主动去Broker上拉取消息的拉模式(Pull)
+    * Broker把消息推送过来的推模式(Push)
     * 顺序消费：由于producer发送消息，会存在网络延迟的问题，需要保证**局部**有序，实际就是把同一组的消息放到同一个queue里面来保证有序
+      > com.lzb.demo.ordermessage.Producer
     * 并行消费：一个线程顺序轮询多个queue
   * topic:消息类型，一个topic可以有多个queue，多个queue分布在多个Broker上
       > Queue是Topic在一个Broker上的分片等分为指定份数后的其中一份，是负载均衡过程中资源分配的基本单元
@@ -75,3 +76,5 @@
   * 执行本地事务，producer 发送rollback或者commit消息
   * 如果broker超时未收到确认，定时任务轮询half队列，回查producer状态
   * 如果确认commit，consumer就可以消费到
+
+## 
